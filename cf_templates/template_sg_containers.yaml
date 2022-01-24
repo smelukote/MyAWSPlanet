@@ -6,13 +6,13 @@ Resources:
     Properties:
       RequiresCompatibilities:
         - "FARGATE"
-      ExecutionRoleArn: "arn:aws:iam::<replace with account ID>:role/ecsTaskExecutionRole"
+      ExecutionRoleArn: "arn:aws:iam::189030388645:role/ecsTaskExecutionRole"
       Cpu: 256
       Memory: 512
       NetworkMode: "awsvpc"
       ContainerDefinitions:
         - Name: "myawsplanet"
-          Image: "<replace with account ID>.dkr.ecr.eu-west-3.amazonaws.com/mydeveloperplanet/myawsplanet:latest"
+          Image: "189030388645.dkr.ecr.us-east-2.amazonaws.com/mydeveloperplanet/myawsplanet"
           MemoryReservation: 256
           Memory: 512
           PortMappings:
@@ -27,9 +27,9 @@ Resources:
     Properties:
       Name: FargateAlb
       Subnets:
-        - subnet-580b0331
-        - subnet-7102210a
-        - subnet-c40f7b89
+        - subnet-078492aa69f1754e0
+        - subnet-02d4c8994c01c2dc4
+        - subnet-08b0315d6d2368439
       Type: application
       SecurityGroups:
         - !GetAtt FargateAlbSG.GroupId
@@ -37,7 +37,7 @@ Resources:
     Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
     Properties:
       Name: MyFargateTargetGroup
-      VpcId: vpc-9d55b7f5
+      VpcId: vpc-00643170f296d0d8c
       Protocol: HTTP
       Port: 8080
       HealthCheckPath: /actuator/
@@ -76,3 +76,4 @@ Resources:
         - IpProtocol: -1
           SourceSecurityGroupId: !GetAtt FargateAlbSG.GroupId
           Description: 'Inbound rule for all traffic'
+
